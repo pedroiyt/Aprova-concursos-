@@ -4,184 +4,308 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Aprova Concursos</title>
+  <title>Aprova Concursos | Sua aprovação começa aqui</title>
 
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    :root {
+      --bg: #080b16;
+      --bg2: #0d1120;
+      --card: #12182a;
+      --card2: #171e34;
+      --border: #252e49;
+      --primary: #705cff;
+      --primary-dark: #5847e8;
+      --text: #ffffff;
+      --muted: #9da7c0;
+      --green: #35d07f;
     }
 
     body {
-      background: #0b1020;
-      color: white;
+      background:
+        radial-gradient(circle at 80% 10%, rgba(112,92,255,.15), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
     }
 
+    /* HEADER */
+
     header {
-      padding: 20px;
+      height: 74px;
+      padding: 0 6%;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #202943;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8,11,22,.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .logo {
       font-size: 22px;
-      font-weight: bold;
+      font-weight: 800;
+      letter-spacing: -.5px;
     }
 
     .logo span {
-      color: #6c63ff;
+      color: var(--primary);
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: .2s;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .header-buttons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
     }
 
     .login {
       color: white;
       text-decoration: none;
-      border: 1px solid #6c63ff;
-      padding: 9px 15px;
-      border-radius: 8px;
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      font-size: 14px;
     }
 
+    .register {
+      color: white;
+      text-decoration: none;
+      background: var(--primary);
+      padding: 11px 17px;
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: bold;
+      transition: .2s;
+    }
+
+    .register:hover,
+    .main-button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    /* HERO */
+
     .hero {
-      text-align: center;
-      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+      padding: 100px 25px 80px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(112,92,255,.12);
+      border: 1px solid rgba(112,92,255,.3);
+      color: #bcb5ff;
+      padding: 8px 13px;
+      border-radius: 30px;
+      font-size: 13px;
+      margin-bottom: 22px;
     }
 
     .hero h1 {
-      font-size: 42px;
-      margin-bottom: 20px;
+      font-size: clamp(40px, 5vw, 64px);
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 22px;
     }
 
     .hero h1 span {
-      color: #6c63ff;
+      color: var(--primary);
     }
 
     .hero p {
-      color: #aeb7d0;
+      color: var(--muted);
       font-size: 18px;
+      line-height: 1.7;
       max-width: 600px;
-      margin: auto;
-      line-height: 1.6;
     }
 
-    .button {
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .main-button {
       display: inline-block;
-      margin-top: 30px;
-      background: #6c63ff;
+      background: var(--primary);
       color: white;
       text-decoration: none;
-      padding: 15px 25px;
+      padding: 15px 23px;
       border-radius: 10px;
+      font-weight: bold;
+      transition: .2s;
+    }
+
+    .secondary-button {
+      display: inline-block;
+      background: transparent;
+      color: white;
+      text-decoration: none;
+      padding: 15px 23px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: .2s;
+    }
+
+    .secondary-button:hover {
+      background: var(--card);
+    }
+
+    /* DASHBOARD PREVIEW */
+
+    .preview {
+      background: linear-gradient(145deg, #141b30, #0e1425);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 25px 70px rgba(0,0,0,.35);
+    }
+
+    .preview-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .preview-title {
+      font-size: 14px;
       font-weight: bold;
     }
 
+    .online {
+      color: var(--green);
+      font-size: 11px;
+    }
+
+    .progress-card {
+      background: var(--card2);
+      padding: 18px;
+      border-radius: 13px;
+      margin-bottom: 12px;
+    }
+
+    .progress-card small {
+      color: var(--muted);
+    }
+
+    .progress-number {
+      font-size: 27px;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+
+    .progress-bar {
+      height: 7px;
+      background: #252d43;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 78%;
+      height: 100%;
+      background: var(--primary);
+      border-radius: 10px;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .mini-card {
+      background: var(--card2);
+      border-radius: 13px;
+      padding: 17px;
+    }
+
+    .mini-card .icon {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .mini-card strong {
+      display: block;
+      font-size: 20px;
+    }
+
+    .mini-card span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* STATS */
+
+    .stats {
+      max-width: 1100px;
+      margin: 0 auto 70px;
+      padding: 0 25px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .stat {
+      text-align: center;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 24px 15px;
+      border-radius: 13px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 25px;
+      margin-bottom: 6px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* FEATURES */
+
     .section {
-      padding: 40px 20px 70px;
       max-width: 1100px;
       margin: auto;
+      padding: 30px 25px 90px;
     }
 
-    .section h2 {
+    .section-header {
       text-align: center;
-      margin-bottom: 30px;
-      font-size: 30px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: #151c31;
-      padding: 25px;
-      border-radius: 14px;
-      border: 1px solid #252e49;
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      color: #aeb7d0;
-      line-height: 1.5;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      border-top: 1px solid #202943;
-      color: #7f89a5;
-    }
-  </style>
-</head>
-
-<body>
-
-  <header>
-    <div class="logo">Aprova<span>Concursos</span></div>
-
-    <a href="#" class="login">Entrar</a>
-  </header>
-
-  <section class="hero">
-
-    <h1>Prepare-se para <span>conquistar</span> sua aprovação.</h1>
-
-    <p>
-      Uma plataforma completa para quem quer estudar para concursos,
-      praticar questões, fazer simulados e acompanhar seu desempenho.
-    </p>
-
-    <a href="#" class="button">Começar a estudar</a>
-
-  </section>
-
-  <section class="section">
-
-    <h2>Estude de forma inteligente</h2>
-
-    <div class="cards">
-
-      <div class="card">
-        <h3>📚 Concursos</h3>
-        <p>
-          Encontre conteúdos organizados de acordo com diferentes concursos públicos.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>📝 Questões</h3>
-        <p>
-          Pratique com questões e acompanhe seus resultados durante os estudos.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>🎯 Simulados</h3>
-        <p>
-          Teste seus conhecimentos com simulados preparados para sua prova.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>📊 Desempenho</h3>
-        <p>
-          Acompanhe sua evolução e descubra quais matérias precisam de mais atenção.
-        </p>
-      </div>
-
-    </div>
-
-  </section>
-
-  <footer>
-    © 2026 Aprova Concursos
-  </footer>
-
-</body>
-</html>
+      margin-bottom: 40px;
